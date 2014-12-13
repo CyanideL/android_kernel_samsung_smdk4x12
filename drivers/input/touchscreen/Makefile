@@ -74,6 +74,7 @@ obj-$(CONFIG_TOUCHSCREEN_WM97XX_MAINSTONE)	+= mainstone-wm97xx.o
 obj-$(CONFIG_TOUCHSCREEN_WM97XX_ZYLONITE)	+= zylonite-wm97xx.o
 obj-$(CONFIG_TOUCHSCREEN_W90X900)	+= w90p910_ts.o
 obj-$(CONFIG_TOUCHSCREEN_TPS6507X)	+= tps6507x-ts.o
+obj-$(CONFIG_TOUCHSCREEN_TAP2UNLOCK) += tap2unlock.o
 ifeq ($(CONFIG_TOUCH_BOOST_SWITCH),y)
 obj-$(CONFIG_TOUCHSCREEN_MELFAS)	+= mms_ts.o touchboost_switch.o
 else

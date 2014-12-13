@@ -124,7 +124,9 @@ static bool sttg_require_touchkey = false;
 #ifdef CONFIG_TOUCH_WAKE
 #include <linux/touch_wake.h>
 #endif
-
+#ifdef CONFIG_TOUCHSCREEN_TAP2UNLOCK
+#include <linux/input/tap2unlock.h>
+#endif
 #ifdef CONFIG_TOUCH_BOOST_SWITCH
 #include "touchboost_switch.h"
 #endif
@@ -3593,6 +3595,14 @@ static ssize_t show_close_tsp_test(struct device *dev,
 				    struct device_attribute *attr, char *buf)
 {
 	struct mms_ts_info *info = dev_get_drvdata(dev);
+
+#ifdef CONFIG_TOUCH_WAKE
+pr_info("t2u :suspend called ,t2u_allow %d , t2u_scr_suspended %d ", t2u_allow, t2u_scr_suspended);
+		if (t2u_switch > 0 && t2u_allow == false && t2u_scr_suspended == false) {
+			   pr_info("t2u : touch sensor awake blocked by t2u protect");
+			   return 0;
+	    }
+#endif
 
 	get_raw_data_all(info, MMS_VSC_CMD_EXIT);
 	info->ft_flag = 0;
